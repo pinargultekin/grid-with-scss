@@ -1,11 +1,23 @@
+// COLOR
 $primary-color: #FA892D;
 $secondary-color:#E890DF;
 $dark-text: #33322D;
 $light-text: #eee;
 
+// GRID
 $gutter-horizontal: 3rem;
-$gutter-vertical: 2rem;
-$max-width: 71.25rem;
+$gutter-vertical: 4rem;
+$grid-width: 1140px;
+
+// MIXIN
+@mixin clearfix{
+&::after{
+  content:"";
+  display:table;
+  clear:both;
+}
+};
+
 
 *,
 *::after,
@@ -22,29 +34,47 @@ body{
   background-color: $primary-color; 
   }
 .row{
-max-width:$max-width;
+max-width:$grid-width;
 margin:0 auto;
  
 &:not(:last-child){
-margin-bottom:2rem;
+margin-bottom:$gutter-vertical;
 }
+ @include clearfix;
 
+ [class^="col-"]{
+  background-color:$secondary-color;
+  float:left;
+  height: 3rem;
+  color:$dark-text;
+  text-align: center;
+  padding:0.9rem;
+  font-weight: 600;
+  border:solid 1px rgba(244, 170, 236, 0.392);
+
+  &:not(:last-child){
+    margin-right: $gutter-horizontal;
+  }
+ }
 .col-1-2{
-background-color:$secondary-color;
+
+width: calc((100% - #{$gutter-horizontal}) / 2);
 }
 .col-1-3{
-background-color:$secondary-color;
+width: calc((100% - 2* #{$gutter-horizontal}) / 3);
+
 }
 .col-1-4{
-background-color:$secondary-color;
+width: calc((100% - 3* #{$gutter-horizontal}) / 4);
+
 }
 .col-2-3{
-background-color:$secondary-color;
+width: calc( 2* ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal});
 }
 .col-2-4{
-background-color:$secondary-color;
+  width: calc( 2* ((100% - 3* #{$gutter-horizontal}) / 4) + #{$gutter-horizontal});
 }
 .col-3-4{
-background-color:$secondary-color;
+  width: calc( 3* ((100% - 3 * #{$gutter-horizontal}) / 4) + 2*#{$gutter-horizontal});
 }
 }
